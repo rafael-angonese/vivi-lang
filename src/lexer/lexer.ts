@@ -1,7 +1,7 @@
 import { Token } from "../token/token"
 
 
-export class Lexical {
+export class Lexer {
 
     content: string = ""
     state: number = 0

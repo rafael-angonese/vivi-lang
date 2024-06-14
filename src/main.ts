@@ -1,28 +1,28 @@
 import { getInput } from "./input/get-input";
-import { Lexical } from "./lexical/lexical";
+import { Lexer } from "./lexer/lexer";
 
 const input = getInput({ fileName: 'input.vivi' });
 
-const lexical = new Lexical(input);
+const lexer = new Lexer(input);
 
-console.log(lexical)
-console.log(lexical.nextToken())
-console.log(lexical)
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
-console.log(lexical.nextToken())
+console.log(lexer)
+console.log(lexer.nextToken())
+console.log(lexer)
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
+console.log(lexer.nextToken())
