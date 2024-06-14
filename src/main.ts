@@ -1,10 +1,28 @@
-interface Token {
-    name: string
-}
+import { getInput } from "./input/get-input";
+import { Lexical } from "./lexical/lexical";
 
-function getToken(): Token {
-    return { name: 'token' }
-}
+const input = getInput({ fileName: 'input.vivi' });
 
-const token = getToken()
-console.log(token)
+const lexical = new Lexical(input);
+
+console.log(lexical)
+console.log(lexical.nextToken())
+console.log(lexical)
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
+console.log(lexical.nextToken())
