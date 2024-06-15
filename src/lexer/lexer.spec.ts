@@ -154,4 +154,148 @@ describe('Lexer', () => {
         const lexer = new Lexer('$');
         expect(() => lexer.tokenize()).toThrow(new LexicalException(`Unexpected character: $`, LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER));
     })
+
+    test("should tokenize a simple AND declaration", () => {
+        const lexer = new Lexer('&&');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.AND);
+        expect(token.value).toEqual('&&');
+    })
+
+    test("should tokenize a simple OR declaration", () => {
+        const lexer = new Lexer('||');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.OR);
+        expect(token.value).toEqual('||');
+    })
+
+    test("should tokenize a simple GREATER_THAN declaration", () => {
+        const lexer = new Lexer('>');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.GREATER_THAN);
+        expect(token.value).toEqual('>');
+    })
+
+    test("should tokenize a simple GREATER_THAN_OR_EQUAL declaration", () => {
+        const lexer = new Lexer('>=');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.GREATER_THAN_OR_EQUAL);
+        expect(token.value).toEqual('>=');
+    })
+
+    test("should tokenize a simple LESS_THAN declaration", () => {
+        const lexer = new Lexer('<');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.LESS_THAN);
+        expect(token.value).toEqual('<');
+    })
+
+    test("should tokenize a simple LESS_THAN_OR_EQUAL declaration", () => {
+        const lexer = new Lexer('<=');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.LESS_THAN_OR_EQUAL);
+        expect(token.value).toEqual('<=');
+    })
+
+    test("should tokenize a simple ASSIGN declaration", () => {
+        const lexer = new Lexer('=');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.ASSIGN);
+        expect(token.value).toEqual('=');
+    })
+
+    test("should tokenize a simple EQUAL declaration", () => {
+        const lexer = new Lexer('==');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.EQUAL);
+        expect(token.value).toEqual('==');
+    })
+
+    test("should tokenize a simple NOT declaration", () => {
+        const lexer = new Lexer('!');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.NOT);
+        expect(token.value).toEqual('!');
+    })
+
+    test("should tokenize a simple NOT_EQUAL declaration", () => {
+        const lexer = new Lexer('!=');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.NOT_EQUAL);
+        expect(token.value).toEqual('!=');
+    })
+
+    test("should tokenize a simple OPEN_PARENTHESIS declaration", () => {
+        const lexer = new Lexer('(');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.OPEN_PARENTHESIS);
+        expect(token.value).toEqual('(');
+    })
+
+    test("should tokenize a simple CLOSE_PARENTHESIS declaration", () => {
+        const lexer = new Lexer(')');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.CLOSE_PARENTHESIS);
+        expect(token.value).toEqual(')');
+    })
+
+    test("should tokenize a simple OPEN_BRACKET declaration", () => {
+        const lexer = new Lexer('[');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.OPEN_BRACKET);
+        expect(token.value).toEqual('[');
+    })
+
+    test("should tokenize a simple CLOSE_BRACKET declaration", () => {
+        const lexer = new Lexer(']');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.CLOSE_BRACKET);
+        expect(token.value).toEqual(']');
+    })
+
+    test("should tokenize a simple OPEN_BRACE declaration", () => {
+        const lexer = new Lexer('{');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.OPEN_BRACE);
+        expect(token.value).toEqual('{');
+    })
+
+    test("should tokenize a simple CLOSE_BRACE declaration", () => {
+        const lexer = new Lexer('}');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.CLOSE_BRACE);
+        expect(token.value).toEqual('}');
+    })
+
+    test("should tokenize a simple COLON declaration", () => {
+        const lexer = new Lexer(':');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.COLON);
+        expect(token.value).toEqual(':');
+    })
+
+    test("should tokenize a simple SEMICOLON declaration", () => {
+        const lexer = new Lexer(';');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.SEMICOLON);
+        expect(token.value).toEqual(';');
+    })
 });

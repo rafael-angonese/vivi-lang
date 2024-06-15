@@ -1,11 +1,25 @@
-import { LEXICAL_EXCEPTION, LexicalException } from "../exceptions/LexicalException"
-import { Token, TokenType } from "../token/token"
+import { LEXICAL_EXCEPTION, LexicalException } from "../exceptions/LexicalException";
+import { Token, TokenType } from "../token/token";
 
 const ID_REGEX = /[a-zA-Z0-9_]/;
 const ID_INIT_REGEX = /[a-zA-Z_]/;
 const DIGIT_REGEX = /\d/;
 const OPERATOR_REGEX = /[+\-*%/]/;
 const WHITESPACE_REGEX = /\s/;
+const AND_REGEX = /\&/;
+const OR_REGEX = /\|/;
+const GREATER_THAN_REGEX = /\>/;
+const LESS_THAN_REGEX = /\</;
+const EQUAL_REGEX = /\=/;
+const NOT_REGEX = /\!/;
+const OPEN_PARENTHESIS_REGEX = /\(/;
+const CLOSE_PARENTHESIS_REGEX = /\)/;
+const OPEN_BRACKET_REGEX = /\[/;
+const CLOSE_BRACKET_REGEX = /\]/;
+const OPEN_BRACE_REGEX = /\{/;
+const CLOSE_BRACE_REGEX = /\}/;
+const COLON_REGEX = /\:/;
+const SEMICOLON_REGEX = /\;/;
 
 export class Lexer {
 
@@ -52,11 +66,62 @@ export class Lexer {
                 return this.getOperator();
             }
 
-            if (/[\(\)=;]/.test(this.currentChar()!)) {
-                // return this.getSymbol();
+            if (this.isAnd(this.currentChar()!)) {
+                return this.getAnd();
             }
 
-            // return this.forgeToken(TokenType.EOF);
+            if (this.isOr(this.currentChar()!)) {
+                return this.getOr();
+            }
+
+            if (this.isGreaterThan(this.currentChar()!)) {
+                return this.getGreaterThan();
+            }
+
+            if (this.isLessThan(this.currentChar()!)) {
+                return this.getLessThan();
+            }
+
+            if (this.isEqual(this.currentChar()!)) {
+                return this.getEqual();
+            }
+
+            if (this.isNot(this.currentChar()!)) {
+                return this.getNot();
+            }
+
+            if (this.isOpenParenthesis(this.currentChar()!)) {
+                return this.getOpenParenthesis();
+            }
+
+            if (this.isCloseParenthesis(this.currentChar()!)) {
+                return this.getCloseParenthesis();
+            }
+
+            if (this.isOpenBrace(this.currentChar()!)) {
+                return this.getOpenBrace();
+            }
+
+            if (this.isCloseBrace(this.currentChar()!)) {
+                return this.getCloseBrace();
+            }
+
+            if (this.isOpenBracket(this.currentChar()!)) {
+                return this.getOpenBracket();
+            }
+
+            if (this.isCloseBracket(this.currentChar()!)) {
+                return this.getCloseBracket();
+            }
+
+            if (this.isColon(this.currentChar()!)) {
+                return this.getColon();
+            }
+
+            if (this.isSemicolon(this.currentChar()!)) {
+                return this.getSemicolon();
+            }
+
             throw new LexicalException(`Unexpected character: ${this.currentChar()}`, LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER);
         }
 
@@ -158,7 +223,7 @@ export class Lexer {
     private getNumber(): Token {
         let result = '';
         let hasDecimalPoint = false;
-        while (this.currentChar() && (/\d/.test(this.currentChar()!) || this.currentChar() === '.')) {
+        while (this.currentChar() && (this.isDigit(this.currentChar()!) || this.currentChar() === '.')) {
             if (this.currentChar() === '.') {
                 if (hasDecimalPoint) {
                     break;
@@ -171,6 +236,172 @@ export class Lexer {
         this.term = result;
         const tokenType = hasDecimalPoint ? TokenType.DECIMAL : TokenType.INTEGER;
         return this.forgeToken(tokenType);
+    }
+
+    private getAnd(): Token {
+        if (this.isAnd(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            if (this.isAnd(this.currentChar()!)) {
+                this.term += this.currentChar()!
+                this.advance();
+                return this.forgeToken(TokenType.AND);
+            } else {
+                throw new LexicalException(`Expected '&' after '&'`, LEXICAL_EXCEPTION.EXPECTED_CHARACTER);
+            }
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getOr(): Token {
+        if (this.isOr(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            if (this.isOr(this.currentChar()!)) {
+                this.term += this.currentChar()!
+                this.advance();
+                return this.forgeToken(TokenType.OR);
+            } else {
+                throw new LexicalException(`Expected '|' after '|'`, LEXICAL_EXCEPTION.EXPECTED_CHARACTER);
+            }
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getGreaterThan(): Token {
+        if (this.isGreaterThan(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            if (this.isEqual(this.currentChar()!)) {
+                this.term += this.currentChar()!
+                this.advance();
+                return this.forgeToken(TokenType.GREATER_THAN_OR_EQUAL);
+            } else {
+                return this.forgeToken(TokenType.GREATER_THAN);
+            }
+        }
+
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getLessThan(): Token {
+        if (this.isLessThan(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            if (this.isEqual(this.currentChar()!)) {
+                this.term += this.currentChar()!
+                this.advance();
+                return this.forgeToken(TokenType.LESS_THAN_OR_EQUAL);
+            } else {
+                return this.forgeToken(TokenType.LESS_THAN);
+            }
+        }
+
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getEqual(): Token {
+        if (this.isEqual(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            if (this.isEqual(this.currentChar()!)) {
+                this.term += this.currentChar()!
+                this.advance();
+                return this.forgeToken(TokenType.EQUAL);
+            } else {
+                return this.forgeToken(TokenType.ASSIGN);
+            }
+        }
+
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getNot(): Token {
+        if (this.isNot(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            if (this.isEqual(this.currentChar()!)) {
+                this.term += this.currentChar()!
+                this.advance();
+                return this.forgeToken(TokenType.NOT_EQUAL);
+            } else {
+                return this.forgeToken(TokenType.NOT);
+            }
+        }
+
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getOpenParenthesis(): Token {
+        if (this.isOpenParenthesis(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.OPEN_PARENTHESIS);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getCloseParenthesis(): Token {
+        if (this.isCloseParenthesis(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.CLOSE_PARENTHESIS);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getOpenBrace(): Token {
+        if (this.isOpenBrace(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.OPEN_BRACE);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getCloseBrace(): Token {
+        if (this.isCloseBrace(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.CLOSE_BRACE);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getOpenBracket(): Token {
+        if (this.isOpenBracket(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.OPEN_BRACKET);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getCloseBracket(): Token {
+        if (this.isCloseBracket(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.CLOSE_BRACKET);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getColon(): Token {
+        if (this.isColon(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.COLON);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getSemicolon(): Token {
+        if (this.isSemicolon(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.SEMICOLON);
+        }
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
     }
 
     private isDigit(value: string): boolean {
@@ -191,6 +422,62 @@ export class Lexer {
 
     private isIdentifier(value: string): boolean {
         return ID_REGEX.test(value);
+    }
+
+    private isAnd(value: string): boolean {
+        return AND_REGEX.test(value);
+    }
+
+    private isOr(value: string): boolean {
+        return OR_REGEX.test(value);
+    }
+
+    private isGreaterThan(value: string): boolean {
+        return GREATER_THAN_REGEX.test(value);
+    }
+
+    private isLessThan(value: string): boolean {
+        return LESS_THAN_REGEX.test(value);
+    }
+
+    private isEqual(value: string): boolean {
+        return EQUAL_REGEX.test(value);
+    }
+
+    private isNot(value: string): boolean {
+        return NOT_REGEX.test(value);
+    }
+
+    private isOpenParenthesis(value: string): boolean {
+        return OPEN_PARENTHESIS_REGEX.test(value);
+    }
+
+    private isCloseParenthesis(value: string): boolean {
+        return CLOSE_PARENTHESIS_REGEX.test(value);
+    }
+
+    private isOpenBracket(value: string): boolean {
+        return OPEN_BRACKET_REGEX.test(value);
+    }
+
+    private isCloseBracket(value: string): boolean {
+        return CLOSE_BRACKET_REGEX.test(value);
+    }
+
+    private isOpenBrace(value: string): boolean {
+        return OPEN_BRACE_REGEX.test(value);
+    }
+
+    private isCloseBrace(value: string): boolean {
+        return CLOSE_BRACE_REGEX.test(value);
+    }
+
+    private isColon(value: string): boolean {
+        return COLON_REGEX.test(value);
+    }
+
+    private isSemicolon(value: string): boolean {
+        return SEMICOLON_REGEX.test(value);
     }
 
     private nextChar(): string {
