@@ -1,55 +1,93 @@
+export enum TokenType {
+  ID = 'id',
+  INTEGER = 'integer',
+  DECIMAL = 'decimal',
+
+  // reserved keywords
+  INT = 'int',
+  DOUBLE = 'double',
+  BOOLEAN = 'boolean',
+  STRING = 'string',
+  IF = 'if',
+  ELSE = 'else',
+  RETURN = 'return',
+  FUNCTION = 'function',
+  TRUE = 'true',
+  FALSE = 'false',
+  NULL = 'null',
+  PRINT = 'print',
+
+  // arithmetic operators
+  PLUS = '+',
+  MINUS = '-',
+  MULTIPLY = '*',
+  DIVIDE = '/',
+  MOD = '%',
+
+  ASSIGN = '=',
+
+  // logic operators
+  AND = "&&",
+  OR = "||",
+  NOT = "!",
+
+  // relational operators
+  GREATER_THAN = '>',
+  GREATER_THAN_OR_EQUAL = '>=',
+  LESS_THAN = '<',
+  LESS_THAN_OR_EQUAL = '<=',
+  EQUAL = '==',
+  NOT_EQUAL = '!=',
+
+  // special symbols
+  OPEN_PARENTHESIS = '(',
+  CLOSE_PARENTHESIS = ')',
+  OPEN_BRACKET = '[',
+  CLOSE_BRACKET = ']',
+  OPEN_BRACE = '{',
+  CLOSE_BRACE = '}',
+  COLON = ':',
+  SEMICOLON = ';',
 
 
-export class Token {
-  public static TK_IDENTIFIER  = 0;
-	public static TK_NUMBER      = 1;
-	public static TK_OPERATOR    = 2;
-	public static TK_PONCTUATION = 3;
-	public static TK_ASSIGN      = 4;
-	
-    type: number = 0
-    text: string = ''
-    line: number = 0
-    column: number = 0
-   
-    constructor() {
-    }
-    // constructor(type: string, text: string) {
-    //     this.type = type;
-	// 	this.text = text;
-    // }
-
-
-  get getType() {
-    return this.type;
-  }
-
-  setType(type: number) {
-    this.type = type;
-  }
-
-  get getText() {
-    return this.text;
-  }
-
-  setText(text: string) {
-    this.text = text;
-  }
-
-  get getLine() {
-    return this.line;
-  }
-
-  setLine(line: number) {
-    this.line = line;
-  }
-
-  get getColumn() {
-    return this.column;
-  }
-
-  setColumn(column: number) {
-    this.column = column;
-  }
-
+  EOF = 'EOF',
 }
+
+export interface Token {
+  type: TokenType;
+  value: string;
+  line: number;
+  column: number;
+}
+
+
+// export class Token {
+//     type: TokenType
+//     value: string = ''
+//     line: number = 0
+//     column: number = 0
+   
+    
+//     constructor(type: TokenType, value: string, line: number, column: number) {
+//         this.type = type;
+// 		// this.text = text;
+//     }
+
+
+//   setType(type: TokenType) {
+//     this.type = type;
+//   }
+
+//   setValue(value: string) {
+//     this.value = value;
+//   }
+
+//   setLine(line: number) {
+//     this.line = line;
+//   }
+
+//   setColumn(column: number) {
+//     this.column = column;
+//   }
+
+// }
