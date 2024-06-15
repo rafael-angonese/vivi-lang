@@ -49,7 +49,6 @@ export enum TokenType {
   COLON = ':',
   SEMICOLON = ';',
 
-
   EOF = 'EOF',
 }
 
@@ -59,35 +58,3 @@ export interface Token {
   line: number;
   column: number;
 }
-
-
-// export class Token {
-//     type: TokenType
-//     value: string = ''
-//     line: number = 0
-//     column: number = 0
-   
-    
-//     constructor(type: TokenType, value: string, line: number, column: number) {
-//         this.type = type;
-// 		// this.text = text;
-//     }
-
-
-//   setType(type: TokenType) {
-//     this.type = type;
-//   }
-
-//   setValue(value: string) {
-//     this.value = value;
-//   }
-
-//   setLine(line: number) {
-//     this.line = line;
-//   }
-
-//   setColumn(column: number) {
-//     this.column = column;
-//   }
-
-// }
