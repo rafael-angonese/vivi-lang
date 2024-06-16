@@ -5,7 +5,7 @@ const ID_REGEX = /[a-zA-Z0-9_]/;
 const ID_INIT_REGEX = /[a-zA-Z_]/;
 const DIGIT_REGEX = /\d/;
 const OPERATOR_REGEX = /[+\-*%/]/;
-const WHITESPACE_REGEX = /\s/;
+const WHITESPACE_REGEX = /[ \t]/;
 const AND_REGEX = /\&/;
 const OR_REGEX = /\|/;
 const GREATER_THAN_REGEX = /\>/;
@@ -20,6 +20,7 @@ const OPEN_BRACE_REGEX = /\{/;
 const CLOSE_BRACE_REGEX = /\}/;
 const COLON_REGEX = /\:/;
 const SEMICOLON_REGEX = /\;/;
+const LINE_BREAK_REGEX = /\r?\n|\r/;
 
 export class Lexer {
 
@@ -49,6 +50,11 @@ export class Lexer {
     public nextToken(): Token {
 
         while (this.currentChar()) {
+            if (this.isLineBreak(this.currentChar()!)) {
+                this.skipLineBreak();
+                continue;
+            }
+
             if (this.isWhitespace(this.currentChar()!)) {
                 this.skipWhitespace();
                 continue;
@@ -122,6 +128,10 @@ export class Lexer {
                 return this.getSemicolon();
             }
 
+            if (this.isEOF()) {
+                return this.forgeToken(TokenType.EOF);
+            }
+
             throw new LexicalException(`Unexpected character: ${this.currentChar()}`, LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER);
         }
 
@@ -152,6 +162,13 @@ export class Lexer {
             value: type === TokenType.EOF ? '' : this.term,
             line: this.line,
             column: this.column - this.term.length + 1
+        }
+    }
+
+    private skipLineBreak(): void {
+        while (this.currentChar() && this.isLineBreak(this.currentChar()!)) {
+            this.line++;
+            this.advance();
         }
     }
 
@@ -487,9 +504,8 @@ export class Lexer {
         return this.content[this.position++];
     }
 
-
-    private isEOFL(value: string): boolean {
-        return value == '\0';
+    private isLineBreak(value: string): boolean {
+        return LINE_BREAK_REGEX.test(value);
     }
 
     private isEOF(): boolean {
