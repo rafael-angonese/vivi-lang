@@ -1,4 +1,19 @@
-$<vivi> 
+$<vivi>
+
+for(n: int = 1; a < 10; n) {
+    return 1;
+}
+
+function fibonacci (n: int): int {
+    if(n == 1) {
+        return 1;
+    }
+    if(n == 2) {
+        return 2;
+    }
+    return value;
+};
+
 idade : int = 3;
 lala: string = 2;
 lala = 2;
