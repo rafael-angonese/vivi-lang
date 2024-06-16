@@ -59,7 +59,7 @@ export class Parser {
     Statements(): Tree | null {
         // Statements → Statement Statements | &
 
-        if (this.currentToken.type !== TokenType.END) {
+        if ([TokenType.ID, TokenType.FUNCTION, TokenType.IF, TokenType.FOR, TokenType.RETURN, TokenType.PRINT].includes(this.currentToken.type) && this.currentToken.type !== TokenType.END) {
             const statement = this.Statement();
             const statements = this.Statements();
 
@@ -72,7 +72,7 @@ export class Parser {
         return null;
     }
 
-    Statement(): Tree {
+    Statement(): Tree | null {
         switch (this.currentToken.type) {
             case TokenType.ID:
                 return this.IdStatement();
@@ -285,7 +285,6 @@ export class Parser {
 
     FunctionDefinition(): Tree {
         // FunctionDefinition → function id ( Parameters ) : Type { Statements };
-        let statements: Tree | null = null
         this.eat(TokenType.FUNCTION);
         const idToken = this.currentToken;
         this.eat(TokenType.ID);
@@ -295,12 +294,9 @@ export class Parser {
         this.eat(TokenType.COLON);
         const returnType = this.Type();
         this.eat(TokenType.OPEN_BRACE);
-        if (this.currentToken.type !== TokenType.CLOSE_BRACE) {
-            statements = this.Statements();
-        }
+        const statements = this.Statements();
         this.eat(TokenType.CLOSE_BRACE);
         this.eat(TokenType.SEMICOLON);
-
 
         let children: Tree[] = []
 
