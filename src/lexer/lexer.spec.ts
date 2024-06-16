@@ -314,4 +314,20 @@ describe('Lexer', () => {
         expect(token.type).toEqual(TokenType.END);
         expect(token.value).toEqual('$</vivi>');
     })
+
+    test("should tokenize a simple FOR declaration", () => {
+        const lexer = new Lexer('for');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.FOR);
+        expect(token.value).toEqual('for');
+    })
+
+    test("should tokenize a simple COMMA declaration", () => {
+        const lexer = new Lexer(',');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.COMMA);
+        expect(token.value).toEqual(',');
+    })
 });

@@ -18,6 +18,7 @@ export enum TokenType {
   FALSE = 'false',
   NULL = 'null',
   PRINT = 'print',
+  FOR = 'for',
 
   // arithmetic operators
   PLUS = '+',
@@ -50,6 +51,7 @@ export enum TokenType {
   CLOSE_BRACE = '}',
   COLON = ':',
   SEMICOLON = ';',
+  COMMA = ',',
 
   EOF = 'EOF',
 }

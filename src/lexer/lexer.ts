@@ -23,6 +23,7 @@ const OPEN_BRACE_REGEX = /\{/;
 const CLOSE_BRACE_REGEX = /\}/;
 const COLON_REGEX = /\:/;
 const SEMICOLON_REGEX = /\;/;
+const COMMA_REGEX = /\,/;
 const LINE_BREAK_REGEX = /\r?\n|\r/;
 
 export class Lexer {
@@ -130,6 +131,10 @@ export class Lexer {
                 return this.getSemicolon();
             }
 
+            if (this.isComma(this.currentChar()!)) {
+                return this.getComma();
+            }
+
             if (this.isDollar(this.currentChar()!)) {
                 return this.getDollar();
             }
@@ -222,6 +227,8 @@ export class Lexer {
                 return this.forgeToken(TokenType.NULL);
             case 'print':
                 return this.forgeToken(TokenType.PRINT);
+            case 'for':
+                return this.forgeToken(TokenType.FOR);
             default:
                 return this.forgeToken(TokenType.ID);
         }
@@ -517,6 +524,20 @@ export class Lexer {
         });
     }
 
+    private getComma(): Token {
+        if (this.isComma(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            return this.forgeToken(TokenType.COMMA);
+        }
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
+    }
+
     private isDigit(value: string): boolean {
         return DIGIT_REGEX.test(value);
     }
@@ -669,6 +690,10 @@ export class Lexer {
 
     private isSemicolon(value: string): boolean {
         return SEMICOLON_REGEX.test(value);
+    }
+
+    private isComma(value: string): boolean {
+        return COMMA_REGEX.test(value);
     }
 
     private nextChar(): string {
