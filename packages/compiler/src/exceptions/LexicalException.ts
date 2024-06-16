@@ -31,12 +31,12 @@ export class LexicalException extends Error {
     this.column = column;
   }
 
-  getBody() {
-    return {
-      message: this.message,
-      error: this.error,
-      line: this.line,
-      column: this.column,
-    };
-  }
+  // getBody() {
+  //   return {
+  //     message: this.message,
+  //     error: this.error,
+  //     line: this.line,
+  //     column: this.column,
+  //   };
+  // }
 }

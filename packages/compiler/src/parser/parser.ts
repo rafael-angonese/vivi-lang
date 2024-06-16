@@ -2,7 +2,7 @@ import { SYNTAX_EXCEPTION, SyntaxException } from "../exceptions/SyntaxException
 import { Lexer } from "../lexer/lexer";
 import { Token, TokenType } from "../token/token";
 
-interface Tree {
+export interface Tree {
     nodeType: TokenType;
     value?: string;
     left?: Tree | null;

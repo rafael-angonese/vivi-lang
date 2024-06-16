@@ -31,12 +31,12 @@ export class SyntaxException extends Error {
     this.tokenType = tokenType
   }
 
-  getBody() {
-    return {
-      message: this.message,
-      error: this.error,
-      token: this.token,
-      tokenType: this
-    };
-  }
+  // public getBody() {
+  //   return {
+  //     message: this.message,
+  //     error: this.error,
+  //     token: this.token,
+  //     tokenType: this
+  //   };
+  // }
 }

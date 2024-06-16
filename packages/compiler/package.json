@@ -1,0 +1,22 @@
+{
+  "name": "@fantastic/compiler",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Rafael Angonese",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "scripts": {
+    "build": "tsup",
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "tsx": "^4.15.4",
+    "vitest": "^1.6.0"
+  }
+}
