@@ -2,7 +2,7 @@ import { getInput } from "./input/get-input";
 import { Lexer } from "./lexer/lexer";
 import { Parser } from "./parser/parser";
 
-const input = getInput({ fileName: 'input.vivi' });
+const input = getInput({ fileName: 'input.txt' });
 // const input = '$<vivi> idade : int = 3; function lala ( name: int ) : int { return name ; } $</vivi>';
 
 const lexer = new Lexer(input);
