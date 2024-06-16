@@ -5,26 +5,38 @@ export enum LEXICAL_EXCEPTION {
   UNRECOGNIZED_SYMBOL = 'UNRECOGNIZED_SYMBOL',
 };
 
-// throw new Error("Unrecognized Number");
-// throw new Error("Unrecognized SYMBOL");
-// throw new Error("Malformed Identifier");
+interface LexicalExceptionProps {
+  message: string,
+  error: LEXICAL_EXCEPTION,
+  line: number,
+  column: number,
+}
 
 export class LexicalException extends Error {
-  public readonly errorCode: LEXICAL_EXCEPTION;
+  public readonly error: LEXICAL_EXCEPTION;
+  public readonly line: number;
+  public readonly column: number;
 
-  constructor(
-    message: string,
-    errorCode: LEXICAL_EXCEPTION,
+  constructor({
+    message,
+    line,
+    column,
+    error,
+  }: LexicalExceptionProps
   ) {
     super(message);
     this.message = message;
-    this.errorCode = errorCode;
+    this.error = error;
+    this.line = line;
+    this.column = column;
   }
 
   getBody() {
     return {
       message: this.message,
-      errorCode: this.errorCode,
+      error: this.error,
+      line: this.line,
+      column: this.column,
     };
   }
 }

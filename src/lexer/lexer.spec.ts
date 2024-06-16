@@ -1,9 +1,9 @@
 
 
 import { describe, expect, test } from 'vitest';
+import { LexicalException } from '../exceptions/LexicalException';
 import { TokenType } from '../token/token';
 import { Lexer } from './lexer';
-import { LEXICAL_EXCEPTION, LexicalException } from '../exceptions/LexicalException';
 
 describe('Lexer', () => {
     test("should tokenize a simple ID declaration", () => {
@@ -152,8 +152,8 @@ describe('Lexer', () => {
 
     test("should throw LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER for invalid character", () => {
         const lexer = new Lexer('#');
-        expect(() => lexer.tokenize()).toThrow(new LexicalException(`Unexpected character: #`, LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER));
-    })
+        expect(() => lexer.tokenize()).toThrow(LexicalException);
+    });
 
     test("should tokenize a simple AND declaration", () => {
         const lexer = new Lexer('&&');

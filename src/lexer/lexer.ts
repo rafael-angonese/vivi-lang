@@ -30,7 +30,7 @@ export class Lexer {
     content: string
     position: number = 0
     line: number = 1
-    column: number = 0
+    column: number = 1
     term: string = ""
 
     constructor(content: string) {
@@ -138,7 +138,12 @@ export class Lexer {
                 return this.forgeToken(TokenType.EOF);
             }
 
-            throw new LexicalException(`Unexpected character: ${this.currentChar()}`, LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER);
+            throw new LexicalException({
+                message: `Unexpected character: ${this.currentChar()}`,
+                error: LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER,
+                line: this.line,
+                column: this.column
+            });
         }
 
         return this.forgeToken(TokenType.EOF);
@@ -239,7 +244,12 @@ export class Lexer {
             case '%':
                 return this.forgeToken(TokenType.MOD);
             default:
-                throw new LexicalException(`Unrecognized operator: ${result}`, LEXICAL_EXCEPTION.UNEXPECTED_OPERATOR);
+                throw new LexicalException({
+                    message: `Unrecognized operator: ${result}`,
+                    error: LEXICAL_EXCEPTION.UNEXPECTED_OPERATOR,
+                    line: this.line,
+                    column: this.column,
+                });
         }
     }
 
@@ -270,10 +280,20 @@ export class Lexer {
                 this.advance();
                 return this.forgeToken(TokenType.AND);
             } else {
-                throw new LexicalException(`Expected '&' after '&'`, LEXICAL_EXCEPTION.EXPECTED_CHARACTER);
+                throw new LexicalException({
+                    message: `Expected '&' after '&'`,
+                    error: LEXICAL_EXCEPTION.EXPECTED_CHARACTER,
+                    line: this.line,
+                    column: this.column,
+                });
             }
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getOr(): Token {
@@ -285,10 +305,20 @@ export class Lexer {
                 this.advance();
                 return this.forgeToken(TokenType.OR);
             } else {
-                throw new LexicalException(`Expected '|' after '|'`, LEXICAL_EXCEPTION.EXPECTED_CHARACTER);
+                throw new LexicalException({
+                    message: `Expected '|' after '|'`,
+                    error: LEXICAL_EXCEPTION.EXPECTED_CHARACTER,
+                    line: this.line,
+                    column: this.column,
+                });
             }
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getGreaterThan(): Token {
@@ -304,7 +334,12 @@ export class Lexer {
             }
         }
 
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getLessThan(): Token {
@@ -320,7 +355,12 @@ export class Lexer {
             }
         }
 
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getEqual(): Token {
@@ -336,7 +376,12 @@ export class Lexer {
             }
         }
 
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getNot(): Token {
@@ -352,7 +397,12 @@ export class Lexer {
             }
         }
 
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getOpenParenthesis(): Token {
@@ -361,7 +411,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.OPEN_PARENTHESIS);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getCloseParenthesis(): Token {
@@ -370,7 +425,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.CLOSE_PARENTHESIS);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getOpenBrace(): Token {
@@ -379,7 +439,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.OPEN_BRACE);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getCloseBrace(): Token {
@@ -388,7 +453,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.CLOSE_BRACE);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getOpenBracket(): Token {
@@ -397,7 +467,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.OPEN_BRACKET);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getCloseBracket(): Token {
@@ -406,7 +481,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.CLOSE_BRACKET);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getColon(): Token {
@@ -415,7 +495,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.COLON);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getSemicolon(): Token {
@@ -424,7 +509,12 @@ export class Lexer {
             this.advance();
             return this.forgeToken(TokenType.SEMICOLON);
         }
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private isDigit(value: string): boolean {
@@ -482,7 +572,12 @@ export class Lexer {
             }
         }
 
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private getDollar(): Token {
@@ -512,7 +607,12 @@ export class Lexer {
             return this.forgeToken(TokenType.END);
         }
 
-        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+        throw new LexicalException({
+            message: `Unrecognized SYMBOL ${this.currentChar()}`,
+            error: LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL,
+            line: this.line,
+            column: this.column,
+        });
     }
 
     private isAnd(value: string): boolean {
