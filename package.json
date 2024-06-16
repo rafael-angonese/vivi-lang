@@ -6,10 +6,10 @@
     "packages/docs"
   ],
   "scripts": {
-    "dev": "npm run dev --workspaces",
-    "test": "npm run test --workspace=compiler",
-    "build": "npm run build --workspaces",
-    "lala": "tsc --build"
+    "dev:compiler": "npm run dev --workspace packages/compiler",
+    "dev:docs": "npm run dev --workspace packages/docs",
+    "test": "npm run test -workspace packages/compiler",
+    "build": "npm run build --workspaces"
   },
   "devDependencies": {
     "tsup": "^8.1.0",
