@@ -1,3 +1,15 @@
-abc  + 123 * 456 / 12.0 
-- 30 + 45.23 / 18 -
-123546 * abcdefg xy
+$<vivi> 
+idade : int = 3;
+lala: string = 2;
+lala = 2;
+teste()
+teste(lala)
+
+function rafa () : int { };
+function rafa (lala: int) : boolean { };
+
+rafa()
+
+lala = 1 + 1;
+
+$</vivi>
