@@ -2,8 +2,7 @@
   "name": "vivi-lang",
   "private": true,
   "workspaces": [
-    "packages/compiler",
-    "packages/docs"
+    "packages/*"
   ],
   "scripts": {
     "dev:compiler": "npm run dev --workspace packages/compiler",

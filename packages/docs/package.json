@@ -12,7 +12,10 @@
   "dependencies": {
     "@astrojs/check": "^0.5.8",
     "astro": "^4.10.2",
-    "@fantastic/compiler": "file:../compiler",
+    "@fantastic/compiler": "*",
     "typescript": "^5.2.2"
+  },
+  "resolutions": {
+    "string-width": "4.2.3"
   }
 }
