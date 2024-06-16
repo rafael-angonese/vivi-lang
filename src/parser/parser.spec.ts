@@ -99,4 +99,17 @@ describe('Parser', () => {
         const tree = parser.parse();
         expect(tree).toBeDefined();
     });
+
+        test("should interpreter print statement", () => {
+        const input = getInput(`
+            print(name);
+            print(10);
+            print(name + 20);
+            `
+        );
+        const lexer = new Lexer(input);
+        const parser = new Parser(lexer);
+        const tree = parser.parse();
+        expect(tree).toBeDefined();
+    });
 });
