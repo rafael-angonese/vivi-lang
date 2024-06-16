@@ -2,6 +2,8 @@ export enum TokenType {
   ID = 'id',
   INTEGER = 'integer',
   DECIMAL = 'decimal',
+  START = '$<vivi>',
+  END = '$</vivi>',
 
   // reserved keywords
   INT = 'int',

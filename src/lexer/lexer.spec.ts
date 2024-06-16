@@ -151,8 +151,8 @@ describe('Lexer', () => {
     })
 
     test("should throw LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER for invalid character", () => {
-        const lexer = new Lexer('$');
-        expect(() => lexer.tokenize()).toThrow(new LexicalException(`Unexpected character: $`, LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER));
+        const lexer = new Lexer('#');
+        expect(() => lexer.tokenize()).toThrow(new LexicalException(`Unexpected character: #`, LEXICAL_EXCEPTION.UNEXPECTED_CHARACTER));
     })
 
     test("should tokenize a simple AND declaration", () => {
@@ -297,5 +297,21 @@ describe('Lexer', () => {
 
         expect(token.type).toEqual(TokenType.SEMICOLON);
         expect(token.value).toEqual(';');
+    })
+
+    test("should tokenize a simple START declaration", () => {
+        const lexer = new Lexer('$<vivi>');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.START);
+        expect(token.value).toEqual('$<vivi>');
+    })
+
+    test("should tokenize a simple END declaration", () => {
+        const lexer = new Lexer('$</vivi>');
+        const [token] = lexer.tokenize();
+
+        expect(token.type).toEqual(TokenType.END);
+        expect(token.value).toEqual('$</vivi>');
     })
 });

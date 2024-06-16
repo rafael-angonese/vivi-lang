@@ -1,6 +1,8 @@
 import { LEXICAL_EXCEPTION, LexicalException } from "../exceptions/LexicalException";
 import { Token, TokenType } from "../token/token";
 
+const START_REGEX = /\$<vivi>/;
+const END_REGEX = /\$<\/vivi>/;
 const ID_REGEX = /[a-zA-Z0-9_]/;
 const ID_INIT_REGEX = /[a-zA-Z_]/;
 const DIGIT_REGEX = /\d/;
@@ -12,6 +14,7 @@ const GREATER_THAN_REGEX = /\>/;
 const LESS_THAN_REGEX = /\</;
 const EQUAL_REGEX = /\=/;
 const NOT_REGEX = /\!/;
+const DOLLAR_REGEX = /\$/;
 const OPEN_PARENTHESIS_REGEX = /\(/;
 const CLOSE_PARENTHESIS_REGEX = /\)/;
 const OPEN_BRACKET_REGEX = /\[/;
@@ -40,7 +43,6 @@ export class Lexer {
 
         do {
             token = this.nextToken();
-            console.log(token)
             tokens.push(token);
         } while (token.type !== TokenType.EOF);
 
@@ -126,6 +128,10 @@ export class Lexer {
 
             if (this.isSemicolon(this.currentChar()!)) {
                 return this.getSemicolon();
+            }
+
+            if (this.isDollar(this.currentChar()!)) {
+                return this.getDollar();
             }
 
             if (this.isEOF()) {
@@ -439,6 +445,74 @@ export class Lexer {
 
     private isIdentifier(value: string): boolean {
         return ID_REGEX.test(value);
+    }
+
+    private isStart(value: string): boolean {
+        return START_REGEX.test(value);
+    }
+
+    private isEnd(value: string): boolean {
+        return END_REGEX.test(value);
+    }
+
+    private isDollar(value: string): boolean {
+        return DOLLAR_REGEX.test(value);
+    }
+
+    private getViviKeywords(): void {
+        if (this.currentChar()! === 'v') {
+            this.term += this.currentChar()!
+            this.advance();
+            if (this.currentChar()! === 'i') {
+                this.term += this.currentChar()!
+                this.advance();
+                if (this.currentChar()! === 'v') {
+                    this.term += this.currentChar()!
+                    this.advance();
+                    if (this.currentChar()! === 'i') {
+                        this.term += this.currentChar()!
+                        this.advance();
+                        if (this.isGreaterThan(this.currentChar()!)) {
+                            this.term += this.currentChar()!
+                            this.advance();
+                            return
+                        }
+                    }
+                }
+            }
+        }
+
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
+    }
+
+    private getDollar(): Token {
+        if (this.isDollar(this.currentChar()!)) {
+            this.term = this.currentChar()!
+            this.advance();
+            if (this.isLessThan(this.currentChar()!)) {
+                this.term += this.currentChar()!
+                this.advance();
+
+                if (this.currentChar()! === '/') {
+                    this.term += this.currentChar()!
+                    this.advance();
+                    this.getViviKeywords();
+                } else {
+                    this.getViviKeywords();
+                }
+
+            }
+        }
+
+        if (this.isStart(this.term)) {
+            return this.forgeToken(TokenType.START);
+        }
+
+        if (this.isEnd(this.term)) {
+            return this.forgeToken(TokenType.END);
+        }
+
+        throw new LexicalException(`Unrecognized SYMBOL ${this.currentChar()}`, LEXICAL_EXCEPTION.UNRECOGNIZED_SYMBOL);
     }
 
     private isAnd(value: string): boolean {
