@@ -20,5 +20,8 @@
   },
   "resolutions": {
     "string-width": "4.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13"
   }
 }
