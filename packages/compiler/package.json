@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsup",
     "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch src/dev.ts",
     "test": "vitest"
   },
   "devDependencies": {
