@@ -58,12 +58,15 @@ const grammar = new Grammar(input);
 
 const first = grammar.calculateFirst();
 const follow = grammar.calculateFollow(first);
+const parsingTable = grammar.createParsingTable(first, follow);
 
 console.log("--------")
 console.log('First Sets:');
 console.log(first)
 console.log('Follow Sets:');
 console.log(follow)
+console.log('Parsing Table:');
+console.log(parsingTable)
 console.log("--------")
 
 // console.log('First Sets:');

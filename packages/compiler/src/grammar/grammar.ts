@@ -121,4 +121,60 @@ export class Grammar {
 
         return follow;
     }
+
+    createParsingTable(first: Map<string, Set<string>>, follow: Map<string, Set<string>>): Map<string, Map<string, string[]>> {
+        const parsingTable = new Map<string, Map<string, string[]>>();
+
+        this.nonTerminals.forEach(nonTerminal => {
+            parsingTable.set(nonTerminal, new Map<string, string[]>());
+        });
+
+        for (const { nonTerminal, production } of this.productionRules) {
+            const firstSet = this.calculateFirstSetOfProduction(first, production);
+
+            firstSet.forEach(terminal => {
+                if (terminal !== 'ε') {
+                    parsingTable.get(nonTerminal)!.set(terminal, production);
+                }
+            });
+
+            if (firstSet.has('ε') || production.length === 0) {
+                const followSet = follow.get(nonTerminal)!;
+                followSet.forEach(terminal => {
+                    parsingTable.get(nonTerminal)!.set(terminal, production);
+                });
+            }
+        }
+
+        return parsingTable;
+    }
+
+    private calculateFirstSetOfProduction(first: Map<string, Set<string>>, production: string[]): Set<string> {
+        const firstSet = new Set<string>();
+
+        for (const symbol of production) {
+            if (this.terminals.has(symbol)) {
+                firstSet.add(symbol);
+                break;
+            } else {
+                const symbolFirstSet = first.get(symbol)!;
+
+                symbolFirstSet.forEach(item => {
+                    if (item !== 'ε') {
+                        firstSet.add(item);
+                    }
+                });
+
+                if (!symbolFirstSet.has('ε')) {
+                    break;
+                }
+            }
+        }
+
+        if (production.every(symbol => first.get(symbol)?.has('ε'))) {
+            firstSet.add('ε');
+        }
+
+        return firstSet;
+    }
 }
