@@ -122,11 +122,11 @@ export class Grammar {
         return follow;
     }
 
-    createParsingTable(first: Map<string, Set<string>>, follow: Map<string, Set<string>>): Map<string, Map<string, string[]>> {
-        const parsingTable = new Map<string, Map<string, string[]>>();
+    createParsingTable(first: Map<string, Set<string>>, follow: Map<string, Set<string>>): Map<string, Map<string, string[] | 'error' | 'sync'>> {
+        const parsingTable = new Map<string, Map<string, string[] | 'error' | 'sync'>>();
 
         this.nonTerminals.forEach(nonTerminal => {
-            parsingTable.set(nonTerminal, new Map<string, string[]>());
+            parsingTable.set(nonTerminal, new Map<string, string[] | 'error' | 'sync'>());
         });
 
         for (const { nonTerminal, production } of this.productionRules) {
@@ -145,6 +145,27 @@ export class Grammar {
                 });
             }
         }
+
+        this.nonTerminals.forEach(nonTerminal => {
+            const tableRow = parsingTable.get(nonTerminal)!;
+            const followSet = follow.get(nonTerminal)!;
+            this.terminals.forEach(terminal => {
+                if (!tableRow.has(terminal)) {
+                    if (followSet.has(terminal)) {
+                        tableRow.set(terminal, 'sync');
+                    } else {
+                        tableRow.set(terminal, 'error');
+                    }
+                }
+            });
+            if (!tableRow.has('$')) {
+                if (followSet.has('$')) {
+                    tableRow.set('$', 'sync');
+                } else {
+                    tableRow.set('$', 'error');
+                }
+            }
+        });
 
         return parsingTable;
     }
