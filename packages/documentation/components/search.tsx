@@ -40,7 +40,7 @@ export default function Search() {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500 dark:text-neutral-400" />
             <Input
               className="w-full rounded-md border py-2 pl-10 pr-4 text-sm shadow-sm "
-              placeholder="Search documentation..."
+              placeholder="Buscar na documentação..."
               type="search"
             />
           </div>

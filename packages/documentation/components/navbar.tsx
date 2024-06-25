@@ -1,15 +1,15 @@
 import { ModeToggle } from "@/components/theme-toggle";
-import { GithubIcon, TwitterIcon, ParenthesesIcon } from "lucide-react";
+import { FLATTEND_ROUTES } from "@/lib/routes-config";
+import { GithubIcon, Braces } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import Search from "./search";
 import Anchor from "./anchor";
 import { SheetLeftbar } from "./leftbar";
-import { FLATTEND_ROUTES } from "@/lib/routes-config";
+import Search from "./search";
+import { buttonVariants } from "./ui/button";
 
 export const NAVLINKS = [
   {
-    title: "Documentation",
+    title: "Documentação",
     href: `/docs/${FLATTEND_ROUTES[0].href}`,
   },
   {
@@ -59,19 +59,11 @@ export function Navbar() {
             <Search />
             <div className="flex -space-x-1">
               <Link
-                href="https://github.com/nisabmohd/Docs-Stater-Template"
+                href="https://github.com/rafael-angonese/vivi-lang"
+                target="_blank"
                 className={buttonVariants({ variant: "ghost", size: "icon" })}
               >
                 <GithubIcon className="h-[1.1rem] w-[1.1rem]" />
-              </Link>
-              <Link
-                href="#"
-                className={buttonVariants({
-                  variant: "ghost",
-                  size: "icon",
-                })}
-              >
-                <TwitterIcon className="h-[1.1rem] w-[1.1rem]" />
               </Link>
               <ModeToggle />
             </div>
@@ -85,8 +77,8 @@ export function Navbar() {
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <ParenthesesIcon className="w-6 h-6 text-muted-foreground" />
-      <h2 className="text-md font-bold">template/docs</h2>
+      <Braces className="w-6 h-6 text-muted-foreground" />
+      <h2 className="text-md font-bold">vivi-lang/docs</h2>
     </Link>
   );
 }
