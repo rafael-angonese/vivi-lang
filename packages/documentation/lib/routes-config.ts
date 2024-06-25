@@ -10,6 +10,10 @@ export const ROUTES = [
         href: "/grammar",
       },
       {
+        title: "Tabela de símbolos",
+        href: "/symbols-table",
+      },
+      {
         title: "Installation",
         href: "/installation",
       },

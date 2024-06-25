@@ -1,0 +1,70 @@
+---
+title: Tabela de símbolos
+description: Tabela de símbolos utilizada para a construção da vivi lang.
+---
+
+## Tabela de símbolos
+
+<Table>
+  <TableCaption>A lista de símbolos.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Token</TableHead>
+      <TableHead>Descrição</TableHead>
+      <TableHead>Lexema</TableHead>
+      <TableHead>Regex</TableHead>
+      <TableHead>Nome</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>letter</TableCell>
+      <TableCell>Composto por qualquer letra minuscula ou maiuscula de a até z</TableCell>
+      <TableCell>a, b, c, d, e, f, A, B, C, D, E, F</TableCell>
+      <TableCell>/[a-zA-Z]/</TableCell>
+      <TableCell>Letra</TableCell>
+    </TableRow>
+
+    <TableRow>
+      <TableCell>digit</TableCell>
+      <TableCell>Composto por número de 0 a 9</TableCell>
+      <TableCell>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</TableCell>
+      <TableCell>/\d/</TableCell>
+      <TableCell>Digito</TableCell>
+    </TableRow>
+
+    <TableRow>
+      <TableCell>str</TableCell>
+      <TableCell>Composto por qualquer caracteres dentro aspas duplas</TableCell>
+      <TableCell>“hello”, “A”, “World!”, “Meu nome:”, “yg5”	</TableCell>
+      <TableCell>/”[^”]*“/</TableCell>
+      <TableCell>Conjunto de caracteres literais</TableCell>
+    </TableRow>
+
+   <TableRow>
+        <td>integer</td>
+        <td>Composto por dígitos de 0 a 9</td>
+        <td>10, 200, 4, 76, 8000, 78645, 2, 7</td>
+        <td>/\b\d+\b/</td>
+        <td>Número inteiro</td>
+        <td></td>
+    </TableRow>
+    <TableRow>
+        <td>decimal</td>
+        <td>Composto por números com separador .(ponto) para a casa decimal</td>
+        <td>3.14, 15.23, 1.5, 4444.33, 999.999, 7.33333</td>
+        <td>/\b\d+\.\d+\b/</td>
+        <td>Número decimal</td>
+        <td></td>
+    </TableRow>
+    <TableRow>
+        <td>id</td>
+        <td>Composto por letras maiúsculas e minúsculas, números, e underlines</td>
+        <td>variável123, meuNome, nome_da_função</td>
+        <td>/^[a-zA-Z_][a-zA-Z0-9_]*$/</td>
+        <td>Identificador, Nome de uma variável, parâmetros de funções e nome de função</td>
+        <td></td>
+    </TableRow>
+
+  </TableBody>
+</Table>
