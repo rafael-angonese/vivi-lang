@@ -1,0 +1,40 @@
+---
+title: Introduction
+description: Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
+---
+
+## About
+
+This is NOT a component library. It's a collection of re-usable components that you can copy and paste into your apps.
+
+What do you mean by not a component library?
+
+I mean you do not install it as a dependency. It is not available or distributed via npm.
+
+Pick the components you need. Copy and paste the code into your project and customize to your needs. The code is yours.
+
+Use this as a reference to build your own component libraries.
+
+## FAQ
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odio veniam delectus molestiae ratione.
+Doloremque aliquam molestiae dolores, voluptatem laboriosam odit.
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
+
+## RSC
+
+```jsx:app/page.tsx {5} showLineNumbers
+import { CustomMDX } from "../components/mdx-remote";
+
+export default function Home() {
+  return (
+    <CustomMDX
+      // h1 now renders with `large-text` className
+      source={`# Hello World
+      This is from Server Components!
+    `}
+    />
+  );
+}
+```
