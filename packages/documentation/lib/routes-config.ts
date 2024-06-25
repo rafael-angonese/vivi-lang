@@ -2,12 +2,12 @@
 
 export const ROUTES = [
   {
-    title: "Getting Started",
+    title: "Introdução",
     href: "getting-started",
     items: [
       {
-        title: "Introduction",
-        href: "/introduction",
+        title: "Gramática LL(1)",
+        href: "/grammar",
       },
       {
         title: "Installation",

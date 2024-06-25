@@ -1,0 +1,48 @@
+---
+title: Gramática LL(1)
+description: Gramatica LL(1) utilizada para a construção da vivi lang.
+---
+
+## Gramática LL(1)
+
+S → Script  
+Script → \vivi Statements vivi\  
+
+FunctionDefinition → function id ( Parameters ) : Type \{ Statements \}  
+FunctionCall → id ( Arguments )  
+
+Parameters -> ParameterList | &  
+ParameterList -> id : Type MoreParameters  
+MoreParameters → , id : Type MoreParameters | &  
+
+Arguments → ArgumentList | &  
+ArgumentList → Expression MoreArguments  
+MoreArguments → , Expression MoreArguments | &  
+
+Statements → Statement Statements | &  
+Statement → VariableDeclaration | VariableAssignment | FunctionDefinition | FunctionCall | IfStatement | ForLoop | ReturnStatement | PrintStatement  
+
+VariableDeclaration → id : Type = Expression ;  
+VariableAssignment → id = Expression ;  
+
+Type → int | double | boolean | string  
+
+IfStatement → if ( Condition ) \{ Statements \} ElseClause  
+ElseClause → else \{ Statements \} | &  
+ForLoop → for ( VariableDeclaration Condition ; Expression ) \{ Statements \}  
+
+Condition → Expression RelationalOp Expression  
+RelationalOp → == | != | < | > | \<= | >=  
+
+ReturnStatement → return Expression ; | return ;
+
+PrintStatement → print ( PrintArgument ) ;  
+PrintArgument → Expression | str 
+
+Expression → Term MoreTerms  
+MoreTerms → + Term MoreTerms | - Term MoreTerms | LogicalOp Term MoreTerms | &  
+
+LogicalOp → && | ||  
+Term → Factor MoreFactors  
+MoreFactors → * Factor MoreFactors | / Factor MoreFactors | % Factor MoreFactors | &  
+Factor → ( Expression ) | id | integer | decimal | digit | str | true | false | null  
