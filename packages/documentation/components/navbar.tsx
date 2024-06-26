@@ -13,21 +13,9 @@ export const NAVLINKS = [
     href: `/docs/${FLATTEND_ROUTES[0].href}`,
   },
   {
-    title: "Examples",
-    href: "#",
-  },
-  {
-    title: "Guides",
-    href: "#",
-  },
-  {
-    title: "Themes",
-    href: "#",
-  },
-  {
-    title: "Blog",
-    href: "#",
-  },
+    title: "Exemplos",
+    href: `/docs/examples`,
+  }
 ];
 
 export function Navbar() {
