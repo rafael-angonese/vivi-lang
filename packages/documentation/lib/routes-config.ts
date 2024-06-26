@@ -14,7 +14,7 @@ export const ROUTES = [
         href: "/automata",
       },
       {
-        title: "Definição da estrutura da sintaxe da LP",
+        title: "Definição da estrutura da sintaxe",
         href: "/structure",
       },
       {

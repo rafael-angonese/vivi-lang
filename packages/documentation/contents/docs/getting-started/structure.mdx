@@ -1,0 +1,86 @@
+---
+title: Definição da estrutura da sintaxe
+description: Definição da estrutura da sintaxe da LP utilizada para a construção da vivi lang.
+---
+
+## Definição da estrutura da sintaxe da LP
+---
+### Início e Fim do Código:
+- Delimitam o bloco de instruções que compõem o programa.
+- Token início: $\<vivi>
+- Token fim: $\</vivi>
+---
+### Dígitos/Números:
+- Representa os números utilizados em operações matemáticas e literais numéricas.
+- Representa os algarismos de 0 a 9.
+- Suporta pontos flutuantes para números fracionários.
+- Exemplo: 0, 2, 7, 10.0, 3.3.
+- Token para dígitos: digit
+- Token para números inteiros: integer
+- Token para números fracionários: decimal
+---
+### Letra:
+- Representa os caracteres literais utilizados para nome de variáveis, identificadores ou outros elementos da linguagem.
+- Representa os caracteres de a-z e A-Z.
+- Exemplo: a, b, c, y.
+- Token para letras: letter
+---
+### Identificador (ID):
+- Representa nomes de variáveis, funções, procedimentos ou outros elementos da linguagem.
+- Regras de formação:
+- Iniciar com letra minúscula ou underline.
+- Permitir letras, números e underlines.
+- Diferencia maiúsculas e minúsculas.
+- Exemplos: variavel, meu_modulo, campo_funcao, meuNome, meu_nome_2.
+- Token: id
+---
+### Tipo de Identificador:
+- Classifica o tipo de dado armazenado em uma variável ou utilizado em uma expressão.
+- Deve ser declarado explicitamente usando a sintaxe id: tipo.
+- Exemplos: idade: int, nome: string, ausente: boolean.
+- Tokens: int, double, boolean, string.
+---
+### Palavras-chave:
+- Reservadas para comandos e estruturas da linguagem.
+- Devem ser escritas com ortografia fixa e não podem ser utilizadas como identificadores.
+- Escritas em letras minúsculas.
+- Tokens: $<vivi>, $</vivi>, if, else, for, return, function, print, int, double, boolean, string, null, true, false.
+- Símbolos de Pontuação:
+- Delimitam expressões, blocos de código e controlam o fluxo do programa.
+- Tokens: (, ), \{, }, [, ], ;, :, =, ,.
+---
+### Operadores lógicos:
+- Utilizado para realizar operações booleanas.
+- Token operador lógico E: &&
+- Token operador lógico Ou: ||
+- Token operador lógico Negação: !
+---
+### Operadores relacionais:
+- Utilizado para realizar operações booleanas.
+- Token operador relacional Maior: >
+- Token operador relacional Maior ou Igual: >=
+- Token operador relacional Menor: \<
+- Token operador relacional Menor ou Igual: \<=
+- Token operador relacional Igual: ==
+- Token operador relacional Diferente: !=
+---
+### Expressão booleana:
+- Permite a execução condicional de instruções.
+- Resulta em true ou false.
+- Pode combinar valores booleanos, operadores lógicos (&&, ||, !) e comparações (==, !=, \<, >, \<=, >=).
+---
+### Operações Aritméticas:
+- Permitem realizar cálculos matemáticos com números.
+- Token Adição: +
+- Token Subtração: -
+- Token Multiplicação: *
+- Token Divisão: /
+- Token Módulo: %
+---
+### Formatação:
+- Utilizados de forma visual para indentar o código.
+- Formatação suportados:
+- Tabulação ( \t )
+- Quebra de linha ( \n )
+- Espaço em branco (  )
+---
