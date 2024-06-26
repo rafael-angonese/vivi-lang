@@ -41,30 +41,354 @@ description: Tabela de símbolos utilizada para a construção da vivi lang.
       <TableCell>Conjunto de caracteres literais</TableCell>
     </TableRow>
 
-   <TableRow>
-        <td>integer</td>
-        <td>Composto por dígitos de 0 a 9</td>
-        <td>10, 200, 4, 76, 8000, 78645, 2, 7</td>
-        <td>/\b\d+\b/</td>
-        <td>Número inteiro</td>
-        <td></td>
+    <TableRow>
+      <TableCell>integer</TableCell>
+      <TableCell>Composto por dígitos de 0 a 9</TableCell>
+      <TableCell>10, 200, 4, 76, 8000, 78645, 2, 7</TableCell>
+      <TableCell>/\b\d+\b/</TableCell>
+      <TableCell>Número inteiro</TableCell>
     </TableRow>
     <TableRow>
-        <td>decimal</td>
-        <td>Composto por números com separador .(ponto) para a casa decimal</td>
-        <td>3.14, 15.23, 1.5, 4444.33, 999.999, 7.33333</td>
-        <td>/\b\d+\.\d+\b/</td>
-        <td>Número decimal</td>
-        <td></td>
+      <TableCell>decimal</TableCell>
+      <TableCell>
+        Composto por números com separador .(ponto) para a casa decimal
+      </TableCell>
+      <TableCell>3.14, 15.23, 1.5, 4444.33, 999.999, 7.33333</TableCell>
+      <TableCell>/\b\d+\.\d+\b/</TableCell>
+      <TableCell>Número decimal</TableCell>
     </TableRow>
     <TableRow>
-        <td>id</td>
-        <td>Composto por letras maiúsculas e minúsculas, números, e underlines</td>
-        <td>variável123, meuNome, nome_da_função</td>
-        <td>/^[a-zA-Z_][a-zA-Z0-9_]*$/</td>
-        <td>Identificador, Nome de uma variável, parâmetros de funções e nome de função</td>
-        <td></td>
+      <TableCell>id</TableCell>
+      <TableCell>
+        Composto por letras maiúsculas e minúsculas, números, e underlines
+      </TableCell>
+      <TableCell>variável123, meuNome, nome_da_função</TableCell>
+      <TableCell>/^[a-zA-Z_][a-zA-Z0-9_]*$/</TableCell>
+      <TableCell>
+        Identificador, Nome de uma variável, parâmetros de funções e nome de função
+      </TableCell>
     </TableRow>
 
+    <TableRow>
+        <TableCell>whitespace</TableCell>
+        <TableCell>Composto por espaços em branco e tabulações</TableCell>
+        <TableCell>,</TableCell>
+        <TableCell>/[ \t]/</TableCell>
+        <TableCell>Espaço em branco e tabulação.</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>linebreak</TableCell>
+        <TableCell>Composto por quebra de linha \n\r</TableCell>
+        <TableCell>\n, \r</TableCell>
+        <TableCell>/\r?\n</TableCell>
+        <TableCell>Quebra de linha</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>$\<vivi></TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: $\<vivi></TableCell>
+        <TableCell>$\<vivi></TableCell>
+        <TableCell>/\$\<vivi>/</TableCell>
+        <TableCell>Palavra reservada Início do programa</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>$\</vivi></TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: $\<vivi></TableCell>
+        <TableCell>$\</vivi></TableCell>
+        <TableCell>/\$\</vivi>/</TableCell>
+        <TableCell>Palavra reservada Fim do programa</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>int</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: int</TableCell>
+        <TableCell>int</TableCell>
+        <TableCell>/\int/</TableCell>
+        <TableCell>Palavra reservada Int</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>double</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: double</TableCell>
+        <TableCell>double</TableCell>
+        <TableCell>/\double/</TableCell>
+        <TableCell>Palavra reservada Double</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>boolean</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: boolean</TableCell>
+        <TableCell>boolean</TableCell>
+        <TableCell>/\boolean/</TableCell>
+        <TableCell>Palavra reservada Bool</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>string</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: string</TableCell>
+        <TableCell>string</TableCell>
+        <TableCell>/\string/</TableCell>
+        <TableCell>Palavra reservada String</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>if</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: if</TableCell>
+        <TableCell>if</TableCell>
+        <TableCell>/\if/</TableCell>
+        <TableCell>Palavra reservada if</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>else</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: else</TableCell>
+        <TableCell>else</TableCell>
+        <TableCell>/\else/</TableCell>
+        <TableCell>Palavra reservada else</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>for</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: for</TableCell>
+        <TableCell>for</TableCell>
+        <TableCell>/\for/</TableCell>
+        <TableCell>Palavra reservada for</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>return</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: return</TableCell>
+        <TableCell>return</TableCell>
+        <TableCell>/\return/</TableCell>
+        <TableCell>Palavra reservada return</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>function</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: function</TableCell>
+        <TableCell>function</TableCell>
+        <TableCell>/\function/</TableCell>
+        <TableCell>Palavra reservada function</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>true</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: true</TableCell>
+        <TableCell>true</TableCell>
+        <TableCell>/\true/</TableCell>
+        <TableCell>Valor verdadeiro/booleano: true</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>false</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: false</TableCell>
+        <TableCell>false</TableCell>
+        <TableCell>/\false/</TableCell>
+        <TableCell>Valor verdadeiro/booleano: false</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>null</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: null</TableCell>
+        <TableCell>null</TableCell>
+        <TableCell>/\null/</TableCell>
+        <TableCell>Valor nulo: null</TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>print</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: print</TableCell>
+        <TableCell>print</TableCell>
+        <TableCell>/\print/</TableCell>
+        <TableCell>Palavra reservada print</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>=</TableCell>
+        <TableCell>Composto pelo caractere: =</TableCell>
+        <TableCell>=</TableCell>
+        <TableCell />
+        <TableCell>Operador de Atribuição</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>+</TableCell>
+        <TableCell>Composto pelo caractere: +</TableCell>
+        <TableCell>+</TableCell>
+        <TableCell />
+        <TableCell>Operador aritmético Adição</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>-</TableCell>
+        <TableCell>Composto pelo caractere: -</TableCell>
+        <TableCell>-</TableCell>
+        <TableCell />
+        <TableCell>Operador aritmético Subtração</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>\*</TableCell>
+        <TableCell>Composto pelo caractere: \*</TableCell>
+        <TableCell>\*</TableCell>
+        <TableCell />
+        <TableCell>Operador aritmético Multiplicação</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>/</TableCell>
+        <TableCell>Composto pelo caractere: /</TableCell>
+        <TableCell>/</TableCell>
+        <TableCell />
+        <TableCell>Operador aritmético Divisão</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>%</TableCell>
+        <TableCell>Composto pelo caractere: %</TableCell>
+        <TableCell>%</TableCell>
+        <TableCell />
+        <TableCell>Operador aritmético Módulo</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>&&</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: &&</TableCell>
+        <TableCell>&&</TableCell>
+        <TableCell />
+        <TableCell>Operador lógico E</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>||</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: ||</TableCell>
+        <TableCell>||</TableCell>
+        <TableCell />
+        <TableCell>Operador lógico OU</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>!</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: !</TableCell>
+        <TableCell>!</TableCell>
+        <TableCell />
+        <TableCell>Operador lógico Negação</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>></TableCell>
+        <TableCell>Composto pelo caractere: ></TableCell>
+        <TableCell>></TableCell>
+        <TableCell />
+        <TableCell>Operador relacional Maior</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>>=</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: >=</TableCell>
+        <TableCell>>=</TableCell>
+        <TableCell />
+        <TableCell>Operador relacional Maior ou Igual</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>\< </TableCell>
+        <TableCell>Composto pelo caractere: < </TableCell>
+        <TableCell>< </TableCell>
+        <TableCell />
+        <TableCell>Operador relacional Menor</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>\<= </TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: \<= </TableCell>
+        <TableCell>\<= </TableCell>
+        <TableCell />
+        <TableCell>Operador relacional Menor ou Igual</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>==</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: ==</TableCell>
+        <TableCell>==</TableCell>
+        <TableCell />
+        <TableCell>Operador relacional Igual</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>!=</TableCell>
+        <TableCell>Composto pelo conjunto de caracteres: !=</TableCell>
+        <TableCell>!=</TableCell>
+        <TableCell />
+        <TableCell>Operador relacional Diferente</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>(</TableCell>
+        <TableCell>Composto pelo caractere: (</TableCell>
+        <TableCell>(</TableCell>
+        <TableCell />
+        <TableCell>Parêntese Abre</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>)</TableCell>
+        <TableCell>Composto pelo caractere: )</TableCell>
+        <TableCell>)</TableCell>
+        <TableCell />
+        <TableCell>Parêntese Fecha</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>[</TableCell>
+        <TableCell>Composto pelo caractere: [</TableCell>
+        <TableCell>[</TableCell>
+        <TableCell />
+        <TableCell>Colchete Abre</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>]</TableCell>
+        <TableCell>Composto pelo caractere: ]</TableCell>
+        <TableCell>]</TableCell>
+        <TableCell />
+        <TableCell>Colchete Fecha</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>\{</TableCell>
+        <TableCell>Composto pelo caractere: \{</TableCell>
+        <TableCell>\{</TableCell>
+        <TableCell />
+        <TableCell>Chave Abre</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>}</TableCell>
+        <TableCell>Composto pelo caractere: }</TableCell>
+        <TableCell>}</TableCell>
+        <TableCell />
+        <TableCell>Chave Fecha</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>:</TableCell>
+        <TableCell>Composto pelo caractere: :</TableCell>
+        <TableCell>:</TableCell>
+        <TableCell />
+        <TableCell>Dois Pontos</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>;</TableCell>
+        <TableCell>Composto pelo caractere: ;</TableCell>
+        <TableCell>;</TableCell>
+        <TableCell />
+        <TableCell>Ponto e Vírgula</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>,</TableCell>
+        <TableCell>Composto pelo caractere: ,</TableCell>
+        <TableCell>,</TableCell>
+        <TableCell />
+        <TableCell>Virgula</TableCell>
+    </TableRow>
+
+    <TableRow>
+        <TableCell>.</TableCell>
+        <TableCell>Composto pelo caractere: .</TableCell>
+        <TableCell>.</TableCell>
+        <TableCell />
+        <TableCell>Ponto</TableCell>
+    </TableRow>
   </TableBody>
 </Table>
