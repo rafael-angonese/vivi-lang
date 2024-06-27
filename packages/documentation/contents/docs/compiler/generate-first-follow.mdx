@@ -1,0 +1,298 @@
+---
+title: Gerador de First/Follow
+description: Gerador automático de First/Follow.
+---
+
+## Importação
+
+Considere importar a biblioteca da vivi-lang, aqui demos o nome de `@fantastic/compiler`
+
+```tsx
+import { generateLL1ParsingTable, GrammarProps } from "@fantastic/compiler";
+```
+
+O compilador expõe uma função chamada `generateLL1ParsingTable` que recebe um objeto com as especificações de uma gramática LL(1) e retorna para a mesma os conjuntos First/Follow e a Tabela Sintática.
+
+## Grámatica LL(1) exemplo
+
+Considere a seguinte grámatica para realizar um bloco de instruções if e else:
+
+---
+
+S -> if ( CONDITION ) BLOCK S'
+
+S' -> else BLOCK | &
+
+CONDITION -> condition
+
+BLOCK -> \{ COMMANDS }
+
+COMMANDS -> command COMMANDS'
+
+COMMANDS' -> command COMMANDS' | &
+
+---
+
+Para o compilador vivi-lang devemos passar a gramática no seguinte formato:
+
+```tsx
+const input: GrammarProps = {
+  startSymbol: "S",
+  terminals: new Set([
+    "if",
+    "(",
+    ")",
+    "{",
+    "}",
+    "else",
+    "condition",
+    "command",
+    "ε",
+  ]),
+  nonTerminals: new Set([
+    "S",
+    "SL",
+    "CONDITION",
+    "BLOCK",
+    "COMMANDS",
+    "COMMANDSL",
+  ]),
+  productionRules: [
+    {
+      nonTerminal: "S",
+      production: ["if", "(", "CONDITION", ")", "BLOCK", "SL"],
+    },
+    { nonTerminal: "SL", production: ["else", "BLOCK"] },
+    { nonTerminal: "SL", production: ["ε"] },
+    { nonTerminal: "CONDITION", production: ["condition"] },
+    { nonTerminal: "BLOCK", production: ["{", "COMMANDS", "}"] },
+    { nonTerminal: "COMMANDS", production: ["command", "COMMANDSL"] },
+    { nonTerminal: "COMMANDSL", production: ["command", "COMMANDSL"] },
+    { nonTerminal: "COMMANDSL", production: ["ε"] },
+  ],
+};
+```
+
+Gerando os conjuntos First/Follow e a Tabela Sintática:
+
+```tsx
+import { generateLL1ParsingTable } from "@fantastic/compiler";
+
+const { first, follow, parsingTable } = generateLL1ParsingTable(input);
+
+console.log(first);
+console.log(follow);
+console.log(parsingTable);
+```
+
+## Estrutura first
+
+
+```jsx
+// First:
+new Map([
+  [
+    "S",
+    {
+      key: "S",
+      value: new Set(["if"]),
+    },
+  ],
+  [
+    "SL",
+    {
+      key: "SL",
+      value: new Set(["else", "ε"]),
+    },
+  ],
+  [
+    "CONDITION",
+    {
+      key: "CONDITION",
+      value: new Set(["condition"]),
+    },
+  ],
+  [
+    "BLOCK",
+    {
+      key: "BLOCK",
+      value: new Set(["{"]),
+    },
+  ],
+  [
+    "COMMANDS",
+    {
+      key: "COMMANDS",
+      value: new Set(["command"]),
+    },
+  ],
+  [
+    "COMMANDSL",
+    {
+      key: "COMMANDSL",
+      value: new Set(["command", "ε"]),
+    },
+  ],
+]);
+```
+
+## Estrutura follow
+
+
+```jsx
+// Follow:
+new Map([
+  [
+    "S",
+    {
+      key: "S",
+      value: new Set(["$"]),
+    },
+  ],
+  [
+    "SL",
+    {
+      key: "SL",
+      value: new Set(["$"]),
+    },
+  ],
+  [
+    "CONDITION",
+    {
+      key: "CONDITION",
+      value: new Set([")"]),
+    },
+  ],
+  [
+    "BLOCK",
+    {
+      key: "BLOCK",
+      value: new Set(["else", "$"]),
+    },
+  ],
+  [
+    "COMMANDS",
+    {
+      key: "COMMANDS",
+      value: new Set(["}"]),
+    },
+  ],
+  [
+    "COMMANDSL",
+    {
+      key: "COMMANDSL",
+      value: new Set(["}"]),
+    },
+  ],
+]);
+```
+
+## Estrutura tabela sintática
+
+```jsx
+// Tabela sintática:
+new Map([
+  [
+    "S",
+    {
+      key: "S",
+      value: new Map([
+        ["if", ["if", "(", "CONDITION", ")", "BLOCK", "SL"]],
+        ["(", "error"],
+        [")", "error"],
+        ["{", "error"],
+        ["}", "error"],
+        ["else", "error"],
+        ["condition", "error"],
+        ["command", "error"],
+        ["$", "sync"],
+      ]),
+    },
+  ],
+  [
+    "SL",
+    {
+      key: "SL",
+      value: new Map([
+        ["else", ["else", "BLOCK"]],
+        ["$", ["ε"]],
+        ["if", "error"],
+        ["(", "error"],
+        [")", "error"],
+        ["{", "error"],
+        ["}", "error"],
+        ["condition", "error"],
+        ["command", "error"],
+      ]),
+    },
+  ],
+  [
+    "CONDITION",
+    {
+      key: "CONDITION",
+      value: new Map([
+        ["condition", ["condition"]],
+        ["if", "error"],
+        ["(", "error"],
+        [")", "sync"],
+        ["{", "error"],
+        ["}", "error"],
+        ["else", "error"],
+        ["command", "error"],
+        ["$", "error"],
+      ]),
+    },
+  ],
+  [
+    "BLOCK",
+    {
+      key: "BLOCK",
+      value: new Map([
+        ["{", ["{", "COMMANDS", "}"]],
+        ["if", "error"],
+        ["(", "error"],
+        [")", "error"],
+        ["}", "error"],
+        ["else", "sync"],
+        ["condition", "error"],
+        ["command", "error"],
+        ["$", "sync"],
+      ]),
+    },
+  ],
+  [
+    "COMMANDS",
+    {
+      key: "COMMANDS",
+      value: new Map([
+        ["command", ["command", "COMMANDSL"]],
+        ["if", "error"],
+        ["(", "error"],
+        [")", "error"],
+        ["{", "error"],
+        ["}", "sync"],
+        ["else", "error"],
+        ["condition", "error"],
+        ["$", "error"],
+      ]),
+    },
+  ],
+  [
+    "COMMANDSL",
+    {
+      key: "COMMANDSL",
+      value: new Map([
+        ["command", ["command", "COMMANDSL"]],
+        ["}", ["ε"]],
+        ["if", "error"],
+        ["(", "error"],
+        [")", "error"],
+        ["{", "error"],
+        ["else", "error"],
+        ["condition", "error"],
+        ["$", "error"],
+      ]),
+    },
+  ],
+]);
+```

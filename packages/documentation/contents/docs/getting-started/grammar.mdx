@@ -6,7 +6,7 @@ description: Gramatica LL(1) utilizada para a construção da vivi lang.
 ## Gramática LL(1)
 
 S → Script  
-Script → \vivi Statements vivi\  
+Script → $\<vivi> Statements $\</vivi> 
 
 FunctionDefinition → function id ( Parameters ) : Type \{ Statements \}  
 FunctionCall → id ( Arguments )  

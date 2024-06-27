@@ -52,8 +52,12 @@ export const ROUTES = [
         href: "/introduction",
       },
       {
-        title: "Compile vivi-lang",
+        title: "Compilação vivi-lang",
         href: "/compile",
+      },
+      {
+        title: "Gerador de First/Follow",
+        href: "/generate-first-follow",
       },
       {
         title: "Accordian",
