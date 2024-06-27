@@ -1,0 +1,100 @@
+---
+title: Exemplos
+description: Exemplos de código aceitos na linguagem.
+---
+
+Mais exemplos como os citados podem ser encontrados nos testes feitos do parser encontrados no arquivo de testes no [Github](https://github.com/rafael-angonese/vivi-lang/blob/main/packages/compiler/src/parser/parser.spec.ts).
+
+
+## Hello World
+
+```tsx
+$<vivi>
+  print("Hello World");
+$</vivi>
+```
+
+## Declaração de variáveis
+
+```tsx
+$<vivi>
+  x: int = 10;
+$</vivi>
+```
+
+## Atribuição de valor
+
+```tsx
+$<vivi>
+  x = 20;
+$</vivi>
+```
+
+## Expressão matematica
+
+```tsx
+$<vivi>
+  x = 5 + 3;
+$</vivi>
+```
+
+## Função
+
+```tsx
+$<vivi>
+  function fibonacci (n: int): int {
+      if(n == 1) {
+          return 1;
+      }
+      if(n == 2) {
+          return 2;
+      }
+      return value;
+  };
+$</vivi>
+```
+
+## If
+
+```tsx
+$<vivi>
+  if(n == 1) {
+      if(n == 2) {
+          return 2;
+      }
+      return 1;
+  }
+$</vivi>
+```
+
+## If Else
+
+```tsx
+$<vivi>
+  if(n == 1) {
+    return 1;
+  } else {
+    return 2;
+  }
+$</vivi>
+```
+
+## For
+
+```tsx
+$<vivi>
+  for(n: int = 1; a < 10; n) {
+      return 1;
+  }
+$</vivi>
+```
+
+## Print
+
+```tsx
+$<vivi>
+  print(name);
+  print(10);
+  print(name + 20);
+$</vivi>
+```

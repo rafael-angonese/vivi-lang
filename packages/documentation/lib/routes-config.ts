@@ -30,6 +30,10 @@ export const ROUTES = [
         href: "/syntatic-table",
       },
       {
+        title: "Exemplos",
+        href: "/examples",
+      },
+      {
         title: "Installation",
         href: "/installation",
       },
