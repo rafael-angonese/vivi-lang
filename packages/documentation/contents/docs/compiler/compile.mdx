@@ -1,0 +1,83 @@
+---
+title: Compilação
+description: Fazendo a compilação de um script vivi-lang.
+---
+
+## Importação
+
+Considere importar a biblioteca da vivi-lang, aqui demos o nome de `@fantastic/compiler`
+
+```tsx
+import { compile } from "@fantastic/compiler";
+```
+
+## Execução da compilação
+
+A execução da compilação
+
+```tsx
+import { compile } from "@fantastic/compiler";
+
+const sourceCode = `
+$<vivi>
+  // your vivi-lang code
+$</vivi>
+`
+const tree = compile(sourceCode)
+
+console.log(tree)
+```
+
+## Com sucesso
+
+Gerando a compilação do seguinte código em vivi-lang
+
+```tsx
+$<vivi>
+  print("Hello World");
+$</vivi>
+```
+
+O retorno será a árvore no seguinte formato:
+
+```tsx
+{
+    "nodeType": "$<vivi>",
+    "left": {
+        "nodeType": "id",
+        "left": {
+            "nodeType": "print",
+            "left": {
+                "nodeType": "id",
+                "value": "name"
+            }
+        },
+        "right": null
+    },
+    "right": {
+        "nodeType": "$</vivi>",
+        "left": null,
+        "right": null
+    }
+}
+```
+
+## Com erro
+
+Gerando a compilação do seguinte código em vivi-lang, removido `;`
+
+```tsx
+$<vivi>
+  print(name)
+$</vivi>
+```
+
+O retorno será um `SyntaxException` no seguinte formato:
+
+```tsx
+{
+    error: "EXPECTED_TOKEN",
+    token: { type: '$</vivi>', value: '$</vivi>', line: 3, column: 1 },
+    tokenType: ';'
+}
+```

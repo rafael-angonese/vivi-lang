@@ -52,6 +52,10 @@ export const ROUTES = [
         href: "/introduction",
       },
       {
+        title: "Compile vivi-lang",
+        href: "/compile",
+      },
+      {
         title: "Accordian",
         href: "/accordian",
       },
