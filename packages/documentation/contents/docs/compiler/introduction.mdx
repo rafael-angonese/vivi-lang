@@ -1,0 +1,29 @@
+---
+title: Introdução
+description: Entendendo o compilador da vivi-lang.
+---
+
+## Estrutura do compilador
+
+Um compilador é um programa de computador que traduz código-fonte escrito em uma linguagem de programação de alto nível para uma linguagem de máquina ou um código intermediário que pode ser executado por um computador.
+O processo de compilação geralmente envolve várias etapas, incluindo análise léxica, análise sintática, análise semântica, otimização e geração de código.
+
+
+Foi criado o compilador usando a linguagem TypeScript com o objetivo de funcionar diretamente no navegador, sem a necessidade de um servidor ou componentes adicionais. 
+Isso significa que todo o processo de compilação pode ser realizado no próprio navegador ou em um ambiente Node.js, tornando o uso mais simples e acessível.
+
+Atualmente, o compilador realiza duas das etapas fundamentais da compilação:
+
+- Análise Léxica (ou Scanner): Esta fase transforma a sequência de caracteres do código-fonte em uma sequência de tokens. Tokens são unidades léxicas significativas, como palavras-chave, identificadores, operadores e símbolos.
+
+- Análise Sintática (ou Parser): Esta fase recebe a sequência de tokens da análise léxica e verifica se a estrutura do código-fonte está sintaticamente correta de acordo com as regras da gramática da linguagem. O resultado desta fase geralmente é uma árvore sintática abstrata (AST) que representa a estrutura hierárquica do código-fonte.
+
+Com essas duas etapas, o compilador já pode identificar e estruturar o código de entrada, preparando o caminho para futuras etapas como análise semântica e geração de código.
+
+
+## Estrutura
+
+A implementação foi realizada conforme exibido na Figura abaixo onde o Analisador Léxico é uma subrotina do Parser.
+Embora seja possível obter todos os tokens da Análise Léxica sem ser uma subrotina do Parser.
+
+![Analisador léxico](/parser-rotine.png)

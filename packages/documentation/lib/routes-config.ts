@@ -44,9 +44,13 @@ export const ROUTES = [
     ],
   },
   {
-    title: "Components",
-    href: "components",
+    title: "Compilador",
+    href: "compiler",
     items: [
+      {
+        title: "Introdução",
+        href: "/introduction",
+      },
       {
         title: "Accordian",
         href: "/accordian",
