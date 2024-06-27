@@ -11,7 +11,7 @@ export const FirstFollow: React.FC = () => {
     return (
         <>
             <div>
-                <h2>First and Follow Sets</h2>
+                <h2>First e Follow</h2>
                 <table>
                     <thead>
                         <tr>
