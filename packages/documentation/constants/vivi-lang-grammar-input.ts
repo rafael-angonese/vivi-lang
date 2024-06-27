@@ -1,6 +1,4 @@
-import { GrammarProps } from "@fantastic/compiler";
-
-export const viviLangGrammarInput: GrammarProps = {
+export const viviLangGrammarInput = {
   startSymbol: "S",
   terminals: new Set([
     "$<vivi>",

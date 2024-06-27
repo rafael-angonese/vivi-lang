@@ -30,6 +30,7 @@ export const SyntacticTable: React.FC = () => {
                 <tr key={nonTerminal}>
                   <td>{nonTerminal}</td>
                   {Array.from(viviLangGrammarInput.terminals).filter((item) => item !== 'ε').map((terminal) => {
+                    // @ts-ignore
                     const values = Array.isArray(row[terminal]) ? row[terminal].map((item) => item).join(' ') : row[terminal]
                     return (
                       <td key={terminal}>{values || "-"}</td>
