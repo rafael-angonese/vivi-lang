@@ -27,7 +27,7 @@ export const ROUTES = [
       },
       {
         title: "Tabela sintática",
-        href: "/typography",
+        href: "/syntatic-table",
       },
       {
         title: "Installation",

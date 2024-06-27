@@ -25,6 +25,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FirstFollow } from "@/components/first-follow";
+import { SyntacticTable } from "@/components/syntatic-table";
 
 type MdxFrontmatter = {
   title: string;
@@ -48,6 +50,8 @@ const components = {
   TabsContent,
   TabsList,
   TabsTrigger,
+  FirstFollow,
+  SyntacticTable,
 };
 
 function getContentPath(slug: string) {
