@@ -56,6 +56,10 @@ export const ROUTES = [
         href: "/compile",
       },
       {
+        title: "Playground",
+        href: "/playground",
+      },
+      {
         title: "Gerador de First/Follow",
         href: "/generate-first-follow",
       },

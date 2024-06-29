@@ -15,6 +15,10 @@ export const NAVLINKS = [
   {
     title: "Exemplos",
     href: `/docs/getting-started/examples`,
+  },
+  {
+    title: "Playground",
+    href: `/docs/compile/playground`,
   }
 ];
 
