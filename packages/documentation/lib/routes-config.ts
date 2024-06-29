@@ -8,6 +8,7 @@ export const ROUTES = [
       {
         title: "Tabela de símbolos",
         href: "/symbols-table",
+        disabled: false,
       },
       {
         title: "Autômatos",
@@ -32,15 +33,7 @@ export const ROUTES = [
       {
         title: "Exemplos",
         href: "/examples",
-      },
-      {
-        title: "Installation",
-        href: "/installation",
-      },
-      {
-        title: "components.json",
-        href: "/components-json",
-      },
+      }
     ],
   },
   {
@@ -62,15 +55,6 @@ export const ROUTES = [
       {
         title: "Gerador de First/Follow",
         href: "/generate-first-follow",
-      },
-      {
-        title: "Accordian",
-        href: "/accordian",
-      },
-      {
-        title: "Alert Dialog",
-        href: "/alert-dialog",
-        disabled: true,
       },
     ],
   },
