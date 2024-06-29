@@ -18,7 +18,7 @@ export const NAVLINKS = [
   },
   {
     title: "Playground",
-    href: `/docs/compile/playground`,
+    href: `/docs/compiler/playground`,
   }
 ];
 
