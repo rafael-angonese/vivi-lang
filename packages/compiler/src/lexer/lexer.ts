@@ -184,6 +184,7 @@ export class Lexer {
     private skipLineBreak(): void {
         while (this.currentChar() && this.isLineBreak(this.currentChar()!)) {
             this.line++;
+            this.column = -1
             this.advance();
         }
     }
