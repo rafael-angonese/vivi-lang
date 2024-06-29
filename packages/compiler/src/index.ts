@@ -2,6 +2,8 @@
 import { Lexer } from "./lexer/lexer";
 import { Parser, Tree } from "./parser/parser";
 import { Grammar, GrammarProps } from "./grammar/grammar";
+import { LexicalException } from "./exceptions/LexicalException";
+import { SyntaxException } from "./exceptions/SyntaxException";
 
 // const input = getInput({ fileName: 'input.txt' });
 // const input = '$<vivi> idade : int = 3; function lala ( name: int ) : int { return name ; } $</vivi>';
@@ -46,4 +48,6 @@ export {
     generateLL1ParsingTable,
     GrammarProps,
     Tree,
+    LexicalException,
+    SyntaxException,
 }
