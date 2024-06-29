@@ -62,7 +62,28 @@ O retorno será a árvore no seguinte formato:
 }
 ```
 
-## Com erro
+## Com erro léxico
+
+Gerando a compilação do seguinte código em vivi-lang onde o @ não é um token válido
+
+```tsx
+$<vivi>
+  print(name);
+  @
+$</vivi>
+```
+
+O retorno será um `LexicalException` no seguinte formato:
+
+```tsx
+{
+    error: "UNEXPECTED_CHARACTER",
+    line: 3,
+    column: 2,
+}
+```
+
+## Com erro sintático
 
 Gerando a compilação do seguinte código em vivi-lang, removido `;`
 
