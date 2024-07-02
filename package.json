@@ -5,9 +5,9 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:compiler": "yarn dev --workspace packages/compiler",
-    "dev:docs": "yarn dev --workspace packages/docs",
-    "test": "yarn test -workspace packages/compiler",
+    "dev:compiler": "yarn workspace @fantastic/compiler dev",
+    "dev:docs": "yarn workspace docs dev",
+    "test": "yarn workspaces run test",
     "build": "yarn workspaces run build"
   },
   "devDependencies": {
